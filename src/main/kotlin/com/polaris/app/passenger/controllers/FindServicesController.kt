@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 class FindServicesController {
 
-    val FIND_SERVICES_PAGE = "find-services"
+    val FIND_SERVICES_PAGE = "find-service"
 
-    @RequestMapping("/find-services")
+    @RequestMapping("/find-service")
     fun findServices() : String {
         return FIND_SERVICES_PAGE
     }
