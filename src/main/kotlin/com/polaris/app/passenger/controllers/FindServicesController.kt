@@ -1,15 +1,19 @@
 package com.polaris.app.passenger.controllers
 
 import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
 class FindServicesController {
 
-    val FIND_SERVICES_PAGE = "find-service"
+    @RequestMapping("/")
+    fun root(model: Model) : String {
+        return "redirect:/find-services"
+    }
 
-    @RequestMapping("/find-service")
-    fun findServices() : String {
-        return FIND_SERVICES_PAGE
+    @RequestMapping("/find-services")
+    fun findServices(model: Model) : String {
+        return "find-services"
     }
 }

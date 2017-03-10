@@ -4,8 +4,23 @@
   <title>Shuttle Map</title>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+  <div th:replace="fragments/styles"></div>
+  <link rel="stylesheet" href="/css/shuttle-map.css"/>
 </head>
 <body>
-  <h1>Shuttle Map Page</h1>
+<h1>Shuttle Map</h1>
+
+<div th:replace="fragments/scripts"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCMCmjl0mitA-dr-aEQdFMGtFNeIQwF7g"></script>
+<script src="/lib/fontawesome-markers/fontawesome-markers.min.js"></script>
+<script src="/js/geolocation.js"></script>
+<script src="/js/shuttle-map.js"></script>
+<script>
+  $(document).ready(function() {
+    var app = new ShuttleMapApp();
+  });
+</script>
 </body>
 </html>

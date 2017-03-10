@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Service Shuttles</title>
+  <title>Service Shuttle</title>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+  <div th:replace="fragments/styles"></div>
+  <link rel="stylesheet" href="/css/service-shuttles.css"/>
 </head>
 <body>
-  <h1>Service Shuttles Page</h1>
+<h1>Service Shuttle</h1>
+
+<div th:replace="fragments/scripts"></div>
+<script src="/js/service-shuttles.js"></script>
+<script>
+  $(document).ready(function() {
+    var app = new ServiceShuttleApp();
+  });
+</script>
 </body>
 </html>

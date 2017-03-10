@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Find Services</title>
+  <title>Find Service</title>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+  <div th:replace="fragments/styles"></div>
+  <link rel="stylesheet" href="/css/find-services.css"/>
 </head>
 <body>
-  <h1>Find Services Page</h1>
+<h1>Find Service</h1>
+
+<div th:replace="fragments/scripts"></div>
+<script src="/js/find-services.js"></script>
+<script>
+  $(document).ready(function() {
+    var app = new FindServiceApp();
+  });
+</script>
 </body>
 </html>
