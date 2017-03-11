@@ -17,3 +17,34 @@ body {
   flex-flow: column;
   align-items: stretch;
 }
+
+header {
+  background: #0f7496;
+  color: white;
+}
+
+#content {
+  flex: 1 0;
+  overflow: hidden;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.card {
+  background: #f8f8f8;
+}
+
+.schedule-card {
+  background: #f8f8f8;
+  font-size: 10pt;
+  height: 100px;
+  width: 85%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.schedule-card .table {
+  margin-bottom: 0;
+}

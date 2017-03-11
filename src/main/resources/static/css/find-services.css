@@ -1,0 +1,17 @@
+#title-container {
+  border-bottom: 1px solid lightgrey;
+}
+
+#service-card-container {
+  flex: 1 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.service-card {
+  cursor: pointer;
+}
+
+.service-card .shuttle-count {
+  font-size: 9pt;
+}
