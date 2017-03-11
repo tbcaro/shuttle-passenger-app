@@ -1,0 +1,27 @@
+#map-container {
+  flex: 1 0;
+  background: #f0f0f0;
+  border-bottom: 1px solid lightgrey;
+}
+
+#shuttle-details-container {
+  flex: 1 0;
+  overflow: hidden;
+}
+
+#shuttle-details-container .state-label {
+  width: 100px;
+}
+
+#shuttle-details-container .schedule-card {
+  background: #f8f8f8;
+  font-size: 8pt;
+  height: 150px;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#shuttle-details-container .schedule-card .table {
+  margin-bottom: 0;
+}

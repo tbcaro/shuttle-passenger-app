@@ -10,17 +10,146 @@
   <link rel="stylesheet" href="/css/shuttle-map.css"/>
 </head>
 <body>
-<h1>Shuttle Map</h1>
+  <header class="header">
+    <div class="container-fluid">
+      <div class="row pt-2 pb-2">
+        <div class="col-6">
+          <a id="btn-shuttles" href="/service-shuttles">
+            <i class="fa fa-chevron-left text-white"></i>
+            Shuttles
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div id="content" class="d-flex flex-column">
+    <div id="map-container" class="align-self-stretch">
 
-<div th:replace="fragments/scripts"></div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCMCmjl0mitA-dr-aEQdFMGtFNeIQwF7g"></script>
-<script src="/lib/fontawesome-markers/fontawesome-markers.min.js"></script>
-<script src="/js/geolocation.js"></script>
-<script src="/js/shuttle-map.js"></script>
-<script>
-  $(document).ready(function() {
-    var app = new ShuttleMapApp();
-  });
-</script>
+      <!-- temporary loading icon -->
+      <div class="row col align-self-stretch">
+        <div class="col align-self-center text-center">
+          <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+          <div class="p-4">
+            Loading...
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div id="shuttle-details-container" class="align-self-stretch">
+      <div class="row">
+        <div class="col-12">
+
+          <!-- test shuttle details card -->
+          <div class="shuttle-details-card card p-2">
+            <div class="row">
+              <div class="col-6">
+                <i class="fa fa-bus"></i>
+                Shuttle 1A
+              </div>
+              <div class="col-6 text-right">
+                <div class="state-label btn btn-sm btn-success">
+                  Driving
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                Route:
+              </div>
+              <div class="col-6 text-right">
+                Downtown Loop
+              </div>
+            </div>
+            <div class="schedule-card card">
+              <div class="row p-1">
+                <div class="col-12">
+                  <table class="table table-sm overflow-y">
+                    <thead>
+                    <th></th>
+                    <th></th>
+                    <th>Location</th>
+                    <th>Est. Arrive</th>
+                    <th>Est. Depart</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td><i class="fa fa-check-square-o"></i></td>
+                      <td><i class="fa fa-map-pin"></i></td>
+                      <td>Airport</td>
+                      <td>4:00 PM</td>
+                      <td>4:30 PM</td>
+                    </tr>
+                    <tr>
+                      <td><i class="fa fa-spinner"></i></td>
+                      <td><i class="fa fa-map-pin"></i></td>
+                      <td>Baseball Stadium</td>
+                      <td>5:00 PM</td>
+                      <td>5:30 PM</td>
+                    </tr>
+                    <tr>
+                      <td><i class="fa fa-square-o"></i></td>
+                      <td><i class="fa fa-map-pin"></i></td>
+                      <td>Hotel</td>
+                      <td>6:00 PM</td>
+                      <td>--</td>
+                    </tr>
+                    <tr>
+                      <td><i class="fa fa-square-o"></i></td>
+                      <td><i class="fa fa-map-pin"></i></td>
+                      <td>Hotel</td>
+                      <td>6:00 PM</td>
+                      <td>--</td>
+                    </tr>
+                    <tr>
+                      <td><i class="fa fa-square-o"></i></td>
+                      <td><i class="fa fa-map-pin"></i></td>
+                      <td>Hotel</td>
+                      <td>6:00 PM</td>
+                      <td>--</td>
+                    </tr>
+                    <tr>
+                      <td><i class="fa fa-square-o"></i></td>
+                      <td><i class="fa fa-map-pin"></i></td>
+                      <td>Hotel</td>
+                      <td>6:00 PM</td>
+                      <td>--</td>
+                    </tr>
+                    <tr>
+                      <td><i class="fa fa-square-o"></i></td>
+                      <td><i class="fa fa-map-pin"></i></td>
+                      <td>Hotel</td>
+                      <td>6:00 PM</td>
+                      <td>--</td>
+                    </tr>
+                    <tr>
+                      <td><i class="fa fa-square-o"></i></td>
+                      <td><i class="fa fa-map-pin"></i></td>
+                      <td>Hotel</td>
+                      <td>6:00 PM</td>
+                      <td>--</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end test shuttle details card -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:replace="fragments/scripts"></div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCMCmjl0mitA-dr-aEQdFMGtFNeIQwF7g"></script>
+  <script src="/lib/fontawesome-markers/fontawesome-markers.min.js"></script>
+  <script src="/js/geolocation.js"></script>
+  <script src="/js/shuttle-map.js"></script>
+  <script>
+    $(document).ready(function() {
+      var app = new ShuttleMapApp();
+    });
+  </script>
 </body>
 </html>
