@@ -10,14 +10,340 @@
   <link rel="stylesheet" href="/css/service-shuttles.css"/>
 </head>
 <body>
-<h1>Service Shuttle</h1>
+  <header class="header">
+    <div class="container-fluid">
+      <div class="row p-2">
+        <div class="col-6">
+          <a id="btn-services" href="/find-services">
+            <i class="fa fa-chevron-left text-white"></i>
+            Services
+          </a>
+        </div>
+        <div class="col-6 text-right">
+          <i id="btn-refresh" class="fa fa-refresh text-white"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div id="content" class="d-flex flex-column">
+    <div id="title-container" class="p-2">
+      <h6 class="text-center h6">Downtown Shuttle Company</h6>
+    </div>
+    <div id="shuttle-card-container" class="align-self-stretch">
+      <div class="row">
+        <div class="col-12">
 
-<div th:replace="fragments/scripts"></div>
-<script src="/js/service-shuttles.js"></script>
-<script>
-  $(document).ready(function() {
-    var app = new ServiceShuttleApp();
-  });
-</script>
+
+          <!-- test cards -->
+          <div class="shuttle-card card m-2 p-2">
+            <div class="row">
+              <div class="col-6">
+                <i class="fa fa-bus"></i>
+                Shuttle 1A
+              </div>
+              <div class="col-6 text-right">
+                <div class="state-label btn btn-sm btn-success">
+                  Driving
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                Route:
+              </div>
+              <div class="col-6 text-right">
+                Downtown Loop
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                Next Stop (2/4):
+              </div>
+            </div>
+            <div class="next-stop-card card p-2 mt-1">
+              <div class="row">
+                <div class="col-10">
+                  <i class="fa fa-map-pin"></i>
+                  Park Bridge
+                </div>
+                <div class="col-2 text-right">
+                  <i class="fa fa-spinner"></i>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  123 Park Bridge Ave
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right">
+                  Est. Arrive:
+                </div>
+                <div class="col-6">
+                  5:00 PM
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right">
+                  Est. Depart:
+                </div>
+                <div class="col-6">
+                  5:30 PM
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shuttle-card card m-2 p-2">
+            <div class="row">
+              <div class="col-6">
+                <i class="fa fa-bus"></i>
+                Shuttle 1A
+              </div>
+              <div class="col-6 text-right">
+                <div class="state-label btn btn-sm btn-success">
+                  Driving
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                Route:
+              </div>
+              <div class="col-6 text-right">
+                Downtown Loop
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                Next Stop (2/4):
+              </div>
+            </div>
+            <div class="next-stop-card card p-2 mt-1">
+              <div class="row">
+                <div class="col-10">
+                  <i class="fa fa-map-pin"></i>
+                  Park Bridge
+                </div>
+                <div class="col-2 text-right">
+                  <i class="fa fa-spinner"></i>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  123 Park Bridge Ave
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right">
+                  Est. Arrive:
+                </div>
+                <div class="col-6">
+                  5:00 PM
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right">
+                  Est. Depart:
+                </div>
+                <div class="col-6">
+                  5:30 PM
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shuttle-card card m-2 p-2">
+            <div class="row">
+              <div class="col-6">
+                <i class="fa fa-bus"></i>
+                Shuttle 1A
+              </div>
+              <div class="col-6 text-right">
+                <div class="state-label btn btn-sm btn-success">
+                  Driving
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                Route:
+              </div>
+              <div class="col-6 text-right">
+                Downtown Loop
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                Next Stop (2/4):
+              </div>
+            </div>
+            <div class="next-stop-card card p-2 mt-1">
+              <div class="row">
+                <div class="col-10">
+                  <i class="fa fa-map-pin"></i>
+                  Park Bridge
+                </div>
+                <div class="col-2 text-right">
+                  <i class="fa fa-spinner"></i>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  123 Park Bridge Ave
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right">
+                  Est. Arrive:
+                </div>
+                <div class="col-6">
+                  5:00 PM
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right">
+                  Est. Depart:
+                </div>
+                <div class="col-6">
+                  5:30 PM
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shuttle-card card m-2 p-2">
+            <div class="row">
+              <div class="col-6">
+                <i class="fa fa-bus"></i>
+                Shuttle 1A
+              </div>
+              <div class="col-6 text-right">
+                <div class="state-label btn btn-sm btn-success">
+                  Driving
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                Route:
+              </div>
+              <div class="col-6 text-right">
+                Downtown Loop
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                Next Stop (2/4):
+              </div>
+            </div>
+            <div class="next-stop-card card p-2 mt-1">
+              <div class="row">
+                <div class="col-10">
+                  <i class="fa fa-map-pin"></i>
+                  Park Bridge
+                </div>
+                <div class="col-2 text-right">
+                  <i class="fa fa-spinner"></i>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  123 Park Bridge Ave
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right">
+                  Est. Arrive:
+                </div>
+                <div class="col-6">
+                  5:00 PM
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right">
+                  Est. Depart:
+                </div>
+                <div class="col-6">
+                  5:30 PM
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shuttle-card card m-2 p-2">
+            <div class="row">
+              <div class="col-6">
+                <i class="fa fa-bus"></i>
+                Shuttle 1A
+              </div>
+              <div class="col-6 text-right">
+                <div class="state-label btn btn-sm btn-success">
+                  Driving
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                Route:
+              </div>
+              <div class="col-6 text-right">
+                Downtown Loop
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                Next Stop (2/4):
+              </div>
+            </div>
+            <div class="next-stop-card card p-2 mt-1">
+              <div class="row">
+                <div class="col-10">
+                  <i class="fa fa-map-pin"></i>
+                  Park Bridge
+                </div>
+                <div class="col-2 text-right">
+                  <i class="fa fa-spinner"></i>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  123 Park Bridge Ave
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right">
+                  Est. Arrive:
+                </div>
+                <div class="col-6">
+                  5:00 PM
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right">
+                  Est. Depart:
+                </div>
+                <div class="col-6">
+                  5:30 PM
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end test cards -->
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:replace="fragments/scripts"></div>
+  <script src="/js/service-shuttles.js"></script>
+  <script>
+    $(document).ready(function() {
+      var app = new ServiceShuttleApp();
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,25 @@
+#title-container {
+  border-bottom: 1px solid lightgrey;
+}
+
+#shuttle-card-container {
+  flex: 1 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#btn-services, #btn-refresh {
+  cursor: pointer;
+}
+
+.shuttle-card {
+  cursor: pointer;
+}
+
+/*.shuttle-card .next-stop-card {*/
+  /*font-size: 9pt;*/
+/*}*/
+
+.shuttle-card .state-label {
+  width: 100px;
+}

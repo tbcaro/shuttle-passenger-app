@@ -23,7 +23,7 @@
   </header>
   <div id="content" class="d-flex flex-column">
     <div id="title-container" class="p-2">
-      <h3 class="text-center h3">Available Services</h3>
+      <h6 class="text-center h6">Available Services</h6>
     </div>
     <div id="service-card-container" class="align-self-stretch">
       <div class="row">
@@ -117,12 +117,12 @@
       </div>
     </div>
   </div>
-<div th:replace="fragments/scripts"></div>
-<script src="/js/find-services.js"></script>
-<script>
-  $(document).ready(function() {
-    var app = new FindServiceApp();
-  });
-</script>
+  <div th:replace="fragments/scripts"></div>
+  <script src="/js/find-services.js"></script>
+  <script>
+    $(document).ready(function() {
+      var app = new FindServiceApp();
+    });
+  </script>
 </body>
 </html>
