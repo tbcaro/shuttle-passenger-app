@@ -16,7 +16,7 @@
 #shuttle-details-container .schedule-card {
   background: #f8f8f8;
   font-size: 8pt;
-  height: 150px;
+  flex: 1 1;
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
