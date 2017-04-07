@@ -1,4 +1,4 @@
-package com.polaris.app.passenger.controllers.adapter
+package com.polaris.app.passenger.controller.adapter
 
 
 class ServiceAdapter {

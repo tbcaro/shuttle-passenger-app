@@ -1,6 +1,6 @@
-package com.polaris.app.passenger.controllers
+package com.polaris.app.passenger.controller
 
-import com.polaris.app.passenger.controllers.adapter.ServiceAdapter
+import com.polaris.app.passenger.controller.adapter.ServiceAdapter
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.RequestMapping
