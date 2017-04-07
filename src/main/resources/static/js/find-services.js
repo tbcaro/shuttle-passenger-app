@@ -7,15 +7,20 @@ function FindServiceApp() {
     // TBC : Setup elements
     elements.txtSearchServices = $('#txt-search-services');
     elements.serviceCardContainer = $('#service-card-container');
+    elements.btnSearch = $('#btn-search');
 
     bindEventHandlers()
   };
 
   var bindEventHandlers = function() {
     elements.serviceCardContainer.on('click', '.service-card', function() {
-      // TBC : TODO : Get public_id attached to service card and query for shuttles using service's public ID
-      var serviceCard = $(this);
-      window.location = '/service-shuttles';
+      var publicId = $(this).data('publicId');
+      window.location = '/service-shuttles?publicId=' + publicId;
+    });
+
+    elements.btnSearch.on('click', function() {
+      var filter = elements.txtSearchServices.val();
+      window.location = '/find-services?filter=' + filter;
     });
   };
 

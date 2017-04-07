@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 class ServiceShuttlesController {
 
     @RequestMapping("/service-shuttles")
-    fun serviceShuttles(model: Model) : String {
+    fun serviceShuttles(model: Model, publicId: String ) : String {
         return "service-shuttles"
     }
 }
