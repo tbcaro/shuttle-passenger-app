@@ -1,5 +1,7 @@
 package com.polaris.app.passenger.service
 
-/**
- * Created by Tyler on 4/8/2017.
- */
+import com.polaris.app.passenger.service.bo.Shuttle
+
+interface ShuttleService{
+    fun retrieveShuttles(serviceID: Int): List<Shuttle>
+}

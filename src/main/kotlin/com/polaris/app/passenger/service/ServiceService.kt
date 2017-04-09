@@ -1,5 +1,8 @@
 package com.polaris.app.passenger.service
 
-/**
- * Created by Tyler on 4/5/2017.
- */
+import com.polaris.app.passenger.service.bo.Service
+
+interface ServiceService{
+    fun retrieveServices(): List<Service>
+    fun retrieveServices(search: String): List<Service>
+}

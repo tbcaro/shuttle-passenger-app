@@ -1,5 +1,9 @@
 package com.polaris.app.passenger.repository
 
-/**
- * Created by Tyler on 4/5/2017.
- */
+import com.polaris.app.passenger.repository.entity.ServiceEntity
+
+interface ServiceRepository{
+    fun findServices(): List<ServiceEntity>
+    fun findServices(search: String): List<ServiceEntity>
+    fun findShuttleNum(serviceID: Int): Int
+}

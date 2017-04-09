@@ -1,5 +1,9 @@
 package com.polaris.app.passenger.repository
 
-/**
- * Created by Tyler on 4/8/2017.
- */
+import com.polaris.app.passenger.repository.entity.ShuttleEntity
+import com.polaris.app.passenger.repository.entity.StopEntity
+
+interface MapRepository{
+    fun findShuttle(shuttleID: Int): ShuttleEntity
+    fun findStops(assignmentID: Int): List<StopEntity>
+}

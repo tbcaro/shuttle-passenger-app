@@ -1,5 +1,7 @@
 package com.polaris.app.passenger.repository
 
-/**
- * Created by Tyler on 4/5/2017.
- */
+enum class StatusType{
+    ACTIVE,
+    DRIVING,
+    AT_STOP
+}
