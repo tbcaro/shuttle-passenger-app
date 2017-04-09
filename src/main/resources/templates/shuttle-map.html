@@ -14,7 +14,7 @@
     <div class="container-fluid">
       <div class="row pt-2 pb-2">
         <div class="col-6">
-          <a id="btn-shuttles" href="/service-shuttles">
+          <a id="btn-shuttles" th:attr="href='/service-shuttles?publicId=' + ${publicId}">
             <i class="fa fa-chevron-left text-white"></i>
             Shuttles
           </a>

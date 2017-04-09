@@ -71,9 +71,10 @@ class ServiceShuttlesController {
         val shuttleActivityAdapters = arrayListOf(activity2, activity3)
 
         model.addAttribute("shuttleActivityAdapters", shuttleActivityAdapters)
+        model.addAttribute("publicId", publicId)
 
         if (shuttleActivityAdapters.size == 1) {
-            return "redirect:/shuttle-map?shuttleId=${shuttleActivityAdapters[0].shuttleId}"
+            return "redirect:/shuttle-map?publicId=${publicId}&shuttleId=${shuttleActivityAdapters[0].shuttleId}"
         } else {
             return "service-shuttles"
         }
