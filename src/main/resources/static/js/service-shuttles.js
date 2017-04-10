@@ -18,7 +18,8 @@ function ServiceShuttleApp() {
 
     elements.shuttleCardContainer.on('click', '.shuttle-card', function() {
       var shuttleId = $(this).data('shuttleId');
-      window.location = '/shuttle-map?shuttleId=' + shuttleId;
+      var publicId = $(this).data('publicId');
+      window.location = '/shuttle-map?publicId=' + publicId + '&shuttleId=' + shuttleId;
     });
   };
 
