@@ -14,12 +14,12 @@ class MapPgRepository(val db: JdbcTemplate): MapRepository {
                 "SELECT * FROM shuttle INNER JOIN shuttle_activity ON (shuttle.\"ID\" = shuttle_activity.shuttleid) INNER JOIN assignment ON (shuttle_activity.assignmentid = assignment.assignmentid) WHERE shuttle.\"ID\" = ?;",
                 arrayOf(shuttleID),{
                     resultSet, rowNum -> ShuttleEntity(
-                        resultSet.getInt("shuttle.ID"),
-                        resultSet.getString("shuttle.Name"),
-                        resultSet.getString("shuttle.iconcolor"),
-                        resultSet.getInt("shuttle_activity.assignmentid"),
-                        resultSet.getString("assignment.routename"),
-                        status = StatusType.valueOf(resultSet.getString("shuttle_activity.status"))
+                        resultSet.getInt("ID"),
+                        resultSet.getString("Name"),
+                        resultSet.getString("iconcolor"),
+                        resultSet.getInt("assignmentid"),
+                        resultSet.getString("routename"),
+                        status = StatusType.valueOf(resultSet.getString("status"))
                     )
                 }
         )
