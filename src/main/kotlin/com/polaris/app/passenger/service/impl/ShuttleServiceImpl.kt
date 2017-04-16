@@ -6,9 +6,9 @@ import com.polaris.app.passenger.service.bo.Shuttle
 import com.polaris.app.passenger.service.bo.Stop
 
 class ShuttleServiceImpl(val shuttleRepository: ShuttleRepository): ShuttleService {
-    override fun retrieveShuttles(serviceID: Int): List<Shuttle> {
+    override fun retrieveShuttles(publicId: String): List<Shuttle> {
         val shuttles = arrayListOf<Shuttle>()
-        val shuttleEntities = this.shuttleRepository.findShuttles(serviceID)
+        val shuttleEntities = this.shuttleRepository.findShuttles(publicId)
 
         shuttleEntities.forEach{
             val stops = arrayListOf<Stop>()

@@ -1,7 +1,7 @@
 package com.polaris.app.passenger.repository.pg
 
+import com.polaris.app.passenger.controller.adapter.enums.ShuttleState
 import com.polaris.app.passenger.repository.ShuttleRepository
-import com.polaris.app.passenger.repository.StatusType
 import com.polaris.app.passenger.repository.entity.ShuttleEntity
 import com.polaris.app.passenger.repository.entity.StopEntity
 import org.springframework.jdbc.core.JdbcTemplate
@@ -11,17 +11,21 @@ import java.time.LocalDateTime
 
 @Component
 class ShuttlePgRepository(val db: JdbcTemplate): ShuttleRepository{
-    override fun findShuttles(serviceID: Int): List<ShuttleEntity> {
+    override fun findShuttles(publicId: String): List<ShuttleEntity> {
         val shuttleEntities = db.query(
-                "SELECT * FROM shuttle INNER JOIN shuttle_activity ON (shuttle.\"ID\" = shuttle_activity.shuttleid) INNER JOIN assignment ON (shuttle_activity.assignmentid = assignment.assignmentid) WHERE shuttle.serviceid = ? AND shuttle_activity.assignmentid != null;",
-                arrayOf(serviceID),{
+                "SELECT * FROM shuttle " +
+                        "INNER JOIN shuttle_activity ON (shuttle.\"ID\" = shuttle_activity.shuttleid) " +
+                        "INNER JOIN assignment ON (shuttle_activity.assignmentid = assignment.assignmentid) " +
+                        "INNER JOIN service ON (shuttle.serviceid = service.serviceid) " +
+                        "WHERE service.publicid = ? AND shuttle_activity.assignmentid != null;",
+                arrayOf(publicId),{
                     resultSet, rowNum -> ShuttleEntity(
                         resultSet.getInt("ID"),
                         resultSet.getString("Name"),
                         resultSet.getString("iconcolor"),
                         resultSet.getInt("assignmentid"),
                         resultSet.getString("routename"),
-                        status = StatusType.valueOf(resultSet.getString("status"))
+                        status = ShuttleState.valueOf(resultSet.getString("status"))
                     )
                 }
         )

@@ -6,8 +6,8 @@ import com.polaris.app.passenger.service.bo.Shuttle
 import com.polaris.app.passenger.service.bo.Stop
 
 class MapServiceImpl(val mapRepository: MapRepository): MapService {
-    override fun retrieveShuttle(serviceID: Int): Shuttle {
-        val shuttleEntity = this.mapRepository.findShuttle(serviceID)
+    override fun retrieveShuttle(shuttleId: Int): Shuttle {
+        val shuttleEntity = this.mapRepository.findShuttle(shuttleId)
 
         val stops = arrayListOf<Stop>()
         val s = this.mapRepository.findStops(shuttleEntity.assignmentID)

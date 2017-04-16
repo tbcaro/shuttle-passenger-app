@@ -1,6 +1,6 @@
 package com.polaris.app.passenger.service.bo
 
-import com.polaris.app.passenger.repository.StatusType
+import com.polaris.app.passenger.controller.adapter.enums.ShuttleState
 
 data class Shuttle(
         val shuttleID: Int,
@@ -8,6 +8,6 @@ data class Shuttle(
         val iconColor: String,
         val assignmentID: Int,
         val routeName: String,
-        val status: StatusType,
+        val status: ShuttleState,
         val stops: List<Stop>
 )

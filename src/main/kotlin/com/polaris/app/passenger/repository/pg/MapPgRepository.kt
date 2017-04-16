@@ -1,7 +1,7 @@
 package com.polaris.app.passenger.repository.pg
 
+import com.polaris.app.passenger.controller.adapter.enums.ShuttleState
 import com.polaris.app.passenger.repository.MapRepository
-import com.polaris.app.passenger.repository.StatusType
 import com.polaris.app.passenger.repository.entity.ShuttleEntity
 import com.polaris.app.passenger.repository.entity.StopEntity
 import org.springframework.jdbc.core.JdbcTemplate
@@ -19,7 +19,7 @@ class MapPgRepository(val db: JdbcTemplate): MapRepository {
                         resultSet.getString("iconcolor"),
                         resultSet.getInt("assignmentid"),
                         resultSet.getString("routename"),
-                        status = StatusType.valueOf(resultSet.getString("status"))
+                        status = ShuttleState.valueOf(resultSet.getString("status"))
                     )
                 }
         )
