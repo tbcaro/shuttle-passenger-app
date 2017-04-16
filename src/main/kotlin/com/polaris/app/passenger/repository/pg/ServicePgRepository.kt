@@ -14,7 +14,8 @@ class ServicePgRepository(val db: JdbcTemplate): ServiceRepository
                 "SELECT * FROM service WHERE isactive = true;",{
                     resultSet, rowNum -> ServiceEntity(
                         resultSet.getInt("serviceid"),
-                        resultSet.getString("publicid")
+                        resultSet.getString("publicid"),
+                        resultSet.getString("servicename")
                     )
                 }
         )
@@ -22,12 +23,14 @@ class ServicePgRepository(val db: JdbcTemplate): ServiceRepository
     }
 
     override fun findServices(search: String): List<ServiceEntity> {
+        val param = "%${search}%"
         val serviceEntities = db.query(
-                "SELECT * FROM service WHERE isactive = true AND lower(publicid) LIKE lower(\'%?%\');",
-                arrayOf(search),{
+                "SELECT * FROM service WHERE isactive = true AND lower(publicid) LIKE lower(?);",
+                arrayOf(param),{
                     resultSet, rowNum -> ServiceEntity(
                         resultSet.getInt("serviceid"),
-                        resultSet.getString("publicid")
+                        resultSet.getString("publicid"),
+                        resultSet.getString("servicename")
                     )
                 }
         )

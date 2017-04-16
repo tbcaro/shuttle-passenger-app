@@ -15,6 +15,7 @@ class ServiceServiceImpl(val serviceRepository: ServiceRepository): ServiceServi
             val service = Service(
                     serviceID = it.serviceID,
                     publicID = it.publicID,
+                    serviceName = it.serviceName,
                     numShuttles = shuttles
             )
             services.add(service)
@@ -31,6 +32,7 @@ class ServiceServiceImpl(val serviceRepository: ServiceRepository): ServiceServi
             val service = Service(
                     serviceID = it.serviceID,
                     publicID = it.publicID,
+                    serviceName = it.serviceName,
                     numShuttles = shuttles
             )
             services.add(service)

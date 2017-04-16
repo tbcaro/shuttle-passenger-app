@@ -1,12 +1,14 @@
 package com.polaris.app.passenger.controller
 
 import com.polaris.app.passenger.controller.adapter.ServiceAdapter
+import com.polaris.app.passenger.service.ServiceService
+import com.polaris.app.passenger.service.bo.Service
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
-class FindServicesController {
+class FindServicesController(private val serviceService: ServiceService) {
 
     @RequestMapping("/")
     fun root(model: Model) : String {
@@ -15,24 +17,32 @@ class FindServicesController {
 
     @RequestMapping("/find-services")
     fun findServices(model: Model, filter: String?) : String {
+        var services: List<Service>
+        var serviceAdapters = arrayListOf<ServiceAdapter>()
 
-        val service1 = ServiceAdapter()
-        service1.serviceName = "Clarion Shuttle Company"
-        service1.publicId = "clarionshuttle"
-        service1.activeShuttleCount = 2
+        if (filter.isNullOrEmpty()) {
+            services = serviceService.retrieveServices()
+        } else {
+            services = serviceService.retrieveServices(filter!!)
+        }
 
-        val service2 = ServiceAdapter()
-        service2.serviceName = "Pittsburgh Shuttle Company"
-        service2.publicId = "pittshuttleco"
-        service2.activeShuttleCount = 4
+        services.forEach {
+            val serviceAdapter = ServiceAdapter()
 
-        val service3 = ServiceAdapter()
-        service3.serviceName = "Pitt-Marriot Shuttle Service"
-        service3.publicId = "marriotpitt"
-        service3.activeShuttleCount = 1
+            serviceAdapter.publicId = it.publicID
+            serviceAdapter.serviceName = it.serviceName
+            serviceAdapter.activeShuttleCount = it.numShuttles
 
-        val serviceAdapters = arrayListOf(service1, service2, service3)
+            serviceAdapters.add(serviceAdapter)
+        }
+
         model.addAttribute("serviceAdapters", serviceAdapters)
+
+        if (filter.isNullOrBlank()) {
+            model.addAttribute("filter", "")
+        } else {
+            model.addAttribute("filter", filter)
+        }
 
         if (serviceAdapters.size == 1) {
             return "redirect:/service-shuttles?publicId=${serviceAdapters[0].publicId}"
