@@ -40,16 +40,20 @@ class ShuttlePgRepository(val db: JdbcTemplate): ShuttleRepository{
 
     override fun findStops(assignmentID: Int): List<StopEntity> {
         val stopEntities = db.query(
-                "SELECT * FROM assignment_stop WHERE assignmentid = ?;",
+                "SELECT * FROM assignment_stop " +
+                        "LEFT OUTER JOIN stop ON (assignment_stop.stopid = stop.\"ID\") " +
+                        "WHERE assignmentid = ?;",
                 arrayOf(assignmentID),{
                     resultSet, rowNum -> StopEntity(
                         resultSet.getInt("assignment_stop_id"),
                         resultSet.getInt("assignmentid"),
                         resultSet.getInt("Index"),
+                        resultSet.getInt("ID"),
                         resultSet.getTimestamp("estimatedtimeofarrival").toLocalDateTime(),
                         resultSet.getTimestamp("estimatedtimeofdeparture").toLocalDateTime(),
                         resultSet.getTimestamp("timeofarrival").toLocalDateTime(),
                         resultSet.getTimestamp("timeofdeparture").toLocalDateTime(),
+                        resultSet.getString("Name"),
                         resultSet.getString("address"),
                         resultSet.getBigDecimal("latitude"),
                         resultSet.getBigDecimal("longitude")

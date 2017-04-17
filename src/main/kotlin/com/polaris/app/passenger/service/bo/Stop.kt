@@ -7,11 +7,13 @@ data class Stop(
         val assignmentStopID: Int,
         val assignmentID: Int,
         val index: Int,
+        val stopId: Int?,
         val ETA: LocalDateTime,
         val ETD: LocalDateTime,
         val TOA: LocalDateTime,
         val TOD: LocalDateTime,
-        val address: String,
+        val stopName: String?,
+        val address: String?,
         val latitude: BigDecimal,
         val longitude: BigDecimal
 )

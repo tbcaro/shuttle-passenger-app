@@ -1,5 +1,6 @@
 package com.polaris.app.passenger.controller
 
+import com.polaris.app.passenger.controller.adapter.AssignmentReport
 import com.polaris.app.passenger.controller.adapter.AssignmentStopAdapter
 import com.polaris.app.passenger.controller.adapter.ShuttleActivityAdapter
 import com.polaris.app.passenger.controller.adapter.enums.ShuttleState
@@ -20,16 +21,38 @@ class ServiceShuttlesController(private val shuttleService: ShuttleService){
 
         shuttles.forEach {
             val shuttleActivity = ShuttleActivityAdapter()
-            // TODO : Get shuttle activity information
             shuttleActivity.shuttleId = it.shuttleID
-            //shuttleActivity.driverName = it.
-            //shuttleActivity.shuttleName = it.
+            shuttleActivity.driverName = "${it.driverFName} ${it.driverLName}"
+            shuttleActivity.shuttleName = it.shuttleName
             shuttleActivity.shuttleStatus = it.status
-            //shuttleActivity.shuttleLatitude = it.
-            //shuttleActivity.shuttleLongitude = BigDecimal("-79.384094")
-            //shuttleActivity.shuttleHeading = BigDecimal("275")
-            //shuttleActivity.assignmentReport?.assignmentStops = stops
-            //shuttleActivity.assignmentReport?.currentStop = 0
+            shuttleActivity.shuttleLatitude = it.latitude
+            shuttleActivity.shuttleLongitude = it.longitude
+            shuttleActivity.shuttleHeading = it.heading
+
+            val assignmentReport = AssignmentReport()
+            assignmentReport.assignmentId = it.assignmentID
+            assignmentReport.currentStop = it.index
+
+            val assignmentStops = arrayListOf<AssignmentStopAdapter>()
+            it.stops.forEach {
+                val assignmentStop = AssignmentStopAdapter()
+
+                assignmentStop.assingmentStopId = it.assignmentStopID
+                assignmentStop.stopId = it.stopId
+                assignmentStop.name = it.stopName ?: "Custom Stop"
+                assignmentStop.address = it.address ?: ""
+                assignmentStop.lat = it.latitude
+                assignmentStop.long = it.longitude
+                assignmentStop.order = it.index
+                assignmentStop.estArriveTime = it.ETA.toLocalTime()
+                assignmentStop.estDepartTime = it.ETD.toLocalTime()
+                assignmentStop.actualArriveTime = it.TOA.toLocalTime()
+                assignmentStop.actualDepartTime = it.TOD.toLocalTime()
+
+                assignmentStops.add(assignmentStop)
+            }
+            shuttleActivity.assignmentReport?.assignmentStops = assignmentStops
+
 
             // TBC : Example comment
 //            val stops = arrayListOf<AssignmentStopAdapter>()

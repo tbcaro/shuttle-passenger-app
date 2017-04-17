@@ -18,10 +18,12 @@ class ShuttleServiceImpl(val shuttleRepository: ShuttleRepository): ShuttleServi
                         assignmentStopID = it.assignmentStopID,
                         assignmentID = it.assignmentID,
                         index = it.index,
+                        stopId = it.stopId,
                         ETA = it.ETA,
                         ETD = it.ETD,
                         TOA = it.TOA,
                         TOD = it.TOD,
+                        stopName = it.stopName,
                         address = it.address,
                         latitude = it.latitude,
                         longitude = it.longitude
