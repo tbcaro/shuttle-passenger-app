@@ -23,13 +23,13 @@ class ApiController(private val mapService: MapService) {
 
         // TODO : Get shuttle activity information
         activityAdapter.shuttleId = shuttle.shuttleID
-        //activityAdapter.driverName = shuttle.
+        activityAdapter.driverName = "${shuttle.driverFName} ${shuttle.driverLName}"
         activityAdapter.routeName = shuttle.routeName
-        activityAdapter.shuttleName = shuttle.name
+        activityAdapter.shuttleName = shuttle.shuttleName
         activityAdapter.shuttleStatus = shuttle.status
-//        activityAdapter.shuttleLatitude = shuttle.
-//        activityAdapter.shuttleLongitude = shuttle.
-//        activityAdapter.shuttleHeading = shuttle.
+        activityAdapter.shuttleLatitude = shuttle.latitude
+        activityAdapter.shuttleLongitude = shuttle.longitude
+        activityAdapter.shuttleHeading = shuttle.heading
 //        activityAdapter.assignmentReport?.assignmentStops =
 //        activityAdapter.assignmentReport?.currentStop =
 //        activityAdapter.assignmentReport?.assignmentId =

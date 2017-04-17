@@ -28,13 +28,22 @@ class ShuttleServiceImpl(val shuttleRepository: ShuttleRepository): ShuttleServi
                 )
                 stops.add(stop)
             }
+
+            val driver = this.shuttleRepository.getDriverInfo(it.driverID)
+
             val shuttle = Shuttle(
                     shuttleID = it.shuttleID,
-                    name = it.shuttleName,
+                    shuttleName = it.shuttleName,
+                    driverFName = driver.fname,
+                    driverLName = driver.lname,
                     iconColor = it.iconColor,
                     assignmentID = it.assignmentID,
                     routeName = it.routeName,
                     status = it.status,
+                    index = it.index,
+                    heading = it.heading,
+                    latitude = it.latitude,
+                    longitude = it.longitude,
                     stops = stops
             )
             shuttles.add(shuttle)
