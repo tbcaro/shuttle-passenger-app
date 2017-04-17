@@ -27,7 +27,7 @@ class ShuttlePgRepository(val db: JdbcTemplate): ShuttleRepository{
                         resultSet.getString("iconcolor"),
                         resultSet.getInt("assignmentid"),
                         resultSet.getString("routename"),
-                        resultSet.getInt("index"),
+                        resultSet.getInt("Index"),
                         resultSet.getBigDecimal("heading"),
                         resultSet.getBigDecimal("latitude"),
                         resultSet.getBigDecimal("longitude"),

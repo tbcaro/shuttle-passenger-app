@@ -2,6 +2,7 @@ package com.polaris.app.passenger.repository.pg
 
 import com.polaris.app.passenger.controller.adapter.enums.ShuttleState
 import com.polaris.app.passenger.repository.MapRepository
+import com.polaris.app.passenger.repository.entity.DriverEntity
 import com.polaris.app.passenger.repository.entity.ShuttleEntity
 import com.polaris.app.passenger.repository.entity.StopEntity
 import org.springframework.jdbc.core.JdbcTemplate
@@ -16,9 +17,14 @@ class MapPgRepository(val db: JdbcTemplate): MapRepository {
                     resultSet, rowNum -> ShuttleEntity(
                         resultSet.getInt("ID"),
                         resultSet.getString("Name"),
+                        resultSet.getInt("driverid"),
                         resultSet.getString("iconcolor"),
                         resultSet.getInt("assignmentid"),
                         resultSet.getString("routename"),
+                        resultSet.getInt("Index"),
+                        resultSet.getBigDecimal("heading"),
+                        resultSet.getBigDecimal("latitude"),
+                        resultSet.getBigDecimal("longitude"),
                         status = ShuttleState.valueOf(resultSet.getString("status"))
                     )
                 }
@@ -45,5 +51,18 @@ class MapPgRepository(val db: JdbcTemplate): MapRepository {
                 }
         )
         return stopEntities
+    }
+
+    override fun getDriverInfo(driverID: Int): DriverEntity {
+        val driver = db.query(
+                "SELECT fname, lname FROM \"User\" WHERE \"ID\" = ?",
+                arrayOf(driverID), {
+                    resultSet, rowNum -> DriverEntity(
+                    resultSet.getString("fname"),
+                    resultSet.getString("lname")
+                )
+            }
+        )
+        return driver[0]
     }
 }

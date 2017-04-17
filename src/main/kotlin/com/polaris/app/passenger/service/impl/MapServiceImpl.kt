@@ -27,13 +27,21 @@ class MapServiceImpl(val mapRepository: MapRepository): MapService {
             stops.add(stop)
         }
 
+        val driver = this.mapRepository.getDriverInfo(shuttleEntity.driverID)
+
         return Shuttle(
                 shuttleID = shuttleEntity.shuttleID,
-                name = shuttleEntity.shuttleName,
+                shuttleName = shuttleEntity.shuttleName,
+                driverFName = driver.fname,
+                driverLName = driver.lname,
                 iconColor = shuttleEntity.iconColor,
                 assignmentID = shuttleEntity.assignmentID,
                 routeName = shuttleEntity.routeName,
                 status = shuttleEntity.status,
+                index = shuttleEntity.index,
+                heading = shuttleEntity.heading,
+                latitude = shuttleEntity.latitude,
+                longitude = shuttleEntity.longitude,
                 stops = stops
         )
     }
