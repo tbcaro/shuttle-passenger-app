@@ -9,6 +9,23 @@ import org.springframework.stereotype.Component
 @Component
 class ServicePgRepository(val db: JdbcTemplate): ServiceRepository
 {
+
+    override fun findServiceByPublicId(publicId: String): ServiceEntity {
+        val serviceEntities = db.query(
+                "SELECT * FROM service WHERE isactive = true AND publicid = ?;",
+                arrayOf(publicId),
+                {
+                    resultSet, rowNum -> ServiceEntity(
+                        resultSet.getInt("serviceid"),
+                        resultSet.getString("publicid"),
+                        resultSet.getString("servicename")
+                    )
+                }
+        )
+        if (serviceEntities.isNotEmpty()) return serviceEntities[0]
+        else throw Exception("Service not found")
+    }
+
     override fun findServices(): List<ServiceEntity> {
         val serviceEntities = db.query(
                 "SELECT * FROM service WHERE isactive = true;",{
@@ -25,7 +42,7 @@ class ServicePgRepository(val db: JdbcTemplate): ServiceRepository
     override fun findServices(search: String): List<ServiceEntity> {
         val param = "%${search}%"
         val serviceEntities = db.query(
-                "SELECT * FROM service WHERE isactive = true AND lower(publicid) LIKE lower(?);",
+                "SELECT * FROM service WHERE isactive = true AND lower(servicename) LIKE lower(?);",
                 arrayOf(param),{
                     resultSet, rowNum -> ServiceEntity(
                         resultSet.getInt("serviceid"),

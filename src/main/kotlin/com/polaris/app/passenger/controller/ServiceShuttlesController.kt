@@ -4,6 +4,7 @@ import com.polaris.app.passenger.controller.adapter.AssignmentReport
 import com.polaris.app.passenger.controller.adapter.AssignmentStopAdapter
 import com.polaris.app.passenger.controller.adapter.ShuttleActivityAdapter
 import com.polaris.app.passenger.controller.adapter.enums.ShuttleState
+import com.polaris.app.passenger.service.ServiceService
 import com.polaris.app.passenger.service.ShuttleService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -12,11 +13,14 @@ import java.math.BigDecimal
 import java.time.LocalTime
 
 @Controller
-class ServiceShuttlesController(private val shuttleService: ShuttleService){
+class ServiceShuttlesController(private val shuttleService: ShuttleService,
+                                private val serviceService: ServiceService
+){
 
     @RequestMapping("/service-shuttles")
     fun serviceShuttles(model: Model, publicId: String ) : String {
         val shuttles = shuttleService.retrieveShuttles(publicId)
+        val service = serviceService.findServiceByPublicId(publicId)
         val shuttleActivityAdapters = arrayListOf<ShuttleActivityAdapter>()
 
         shuttles.forEach {
@@ -52,20 +56,9 @@ class ServiceShuttlesController(private val shuttleService: ShuttleService){
                 assignmentStops.add(assignmentStop)
             }
             shuttleActivity.assignmentReport?.assignmentStops = assignmentStops
-
-
-            // TBC : Example comment
-//            val stops = arrayListOf<AssignmentStopAdapter>()
-//            val stop1 = AssignmentStopAdapter()
-//            stop1.name = "Stop 1"
-//            stop1.order = 0
-//            stop1.address = "123 Baseball Stadium Road"
-//            stop1.lat = BigDecimal("41.192382")
-//            stop1.long = BigDecimal("-79.391694")
-//            stop1.estArriveTime = LocalTime.of(11, 30)
-//            stop1.estDepartTime = LocalTime.of(12, 0)
         }
 
+        model.addAttribute("serviceName", service.serviceName)
         model.addAttribute("shuttleActivityAdapters", shuttleActivityAdapters)
         model.addAttribute("publicId", publicId)
 

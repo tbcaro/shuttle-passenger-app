@@ -6,6 +6,16 @@ import com.polaris.app.passenger.service.ServiceService
 import com.polaris.app.passenger.service.bo.Service
 
 class ServiceServiceImpl(val serviceRepository: ServiceRepository): ServiceService{
+    override fun findServiceByPublicId(publicId: String): Service {
+        val serviceEntity = this.serviceRepository.findServiceByPublicId(publicId)
+        return Service(
+                serviceID = serviceEntity.serviceID,
+                publicID = serviceEntity.publicID,
+                serviceName = serviceEntity.serviceName,
+                numShuttles = 0
+        )
+    }
+
     override fun retrieveServices(): List<Service> {
         val services = arrayListOf<Service>()
         val serviceEntities = this.serviceRepository.findServices()
