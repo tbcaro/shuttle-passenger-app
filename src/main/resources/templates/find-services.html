@@ -15,7 +15,10 @@
       <div class="row p-2">
         <div class="col-10 offset-1">
           <div class="input-group">
-            <input type="text" id="txt-search-services" class="form-control" placeholder="Filter by name"/>
+            <input type="text" id="txt-search-services" class="form-control" placeholder="Filter by name" th:value="${filter}"/>
+            <span class="input-group-btn">
+              <button id="btn-search" class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
+            </span>
           </div>
         </div>
       </div>
@@ -31,87 +34,14 @@
 
 
           <!-- test cards -->
-          <div class="service-card card m-2 p-2">
+          <div th:each="serviceAdapter : ${serviceAdapters}" class="service-card card m-2 p-2" th:attr="data-public-id=${serviceAdapter.publicId}">
             <div class="row">
-              <div class="col-12">
-                Downtown Shuttle Company
-              </div>
+              <div th:text="${serviceAdapter.serviceName}" class="col-12"></div>
             </div>
             <div class="row">
-              <div class="col-12 shuttle-count pt-2">
-                2 shuttles active
-              </div>
+              <div th:text="${serviceAdapter.activeShuttleCount} + ' shuttles active'" class="col-12 shuttle-count pt-2"></div>
             </div>
           </div>
-
-          <div class="service-card card m-2 p-2">
-            <div class="row">
-              <div class="col-12">
-                Downtown Shuttle Company
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 shuttle-count pt-2">
-                2 shuttles active
-              </div>
-            </div>
-          </div>
-
-          <div class="service-card card m-2 p-2">
-            <div class="row">
-              <div class="col-12">
-                Downtown Shuttle Company
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 shuttle-count pt-2">
-                2 shuttles active
-              </div>
-            </div>
-          </div>
-
-          <div class="service-card card m-2 p-2">
-            <div class="row">
-              <div class="col-12">
-                Downtown Shuttle Company
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 shuttle-count pt-2">
-                2 shuttles active
-              </div>
-            </div>
-          </div>
-
-          <div class="service-card card m-2 p-2">
-            <div class="row">
-              <div class="col-12">
-                Downtown Shuttle Company
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 shuttle-count pt-2">
-                2 shuttles active
-              </div>
-            </div>
-          </div>
-
-          <div class="service-card card m-2 p-2">
-            <div class="row">
-              <div class="col-12">
-                Downtown Shuttle Company
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 shuttle-count pt-2">
-                2 shuttles active
-              </div>
-            </div>
-          </div>
-          <!-- end test cards -->
-
-
-
 
         </div>
       </div>

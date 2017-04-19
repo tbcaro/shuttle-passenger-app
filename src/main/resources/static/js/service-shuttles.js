@@ -17,9 +17,9 @@ function ServiceShuttleApp() {
     });
 
     elements.shuttleCardContainer.on('click', '.shuttle-card', function() {
-      // TBC : TODO : Get shuttle id attached to service card and query for shuttle activity using shuttle id
-      var shuttleCard = $(this);
-      window.location = '/shuttle-map';
+      var shuttleId = $(this).data('shuttleId');
+      var publicId = $(this).data('publicId');
+      window.location = '/shuttle-map?publicId=' + publicId + '&shuttleId=' + shuttleId;
     });
   };
 
