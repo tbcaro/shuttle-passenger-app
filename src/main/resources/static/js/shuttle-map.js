@@ -114,11 +114,11 @@ function ShuttleMapApp() {
 
         icon.append($('<i>').addClass('fa'));
         if (report.currentStop < i) {
-          icon.find('i').addClass('fa-square-o');
+          icon.find('i').addClass('');
         } else if (report.currentStop === i) {
           icon.find('i').addClass('fa-spinner');
         } else {
-          icon.find('i').addClass('fa-check-square-o');
+          icon.find('i').addClass('fa-check');
         }
 
         stopIcon.append($('<i>').addClass('fa fa-map-pin'));
