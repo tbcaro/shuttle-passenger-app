@@ -10,7 +10,7 @@ data class Shuttle(
         val driverLName: String,
         val iconColor: String,
         val assignmentID: Int,
-        val routeName: String,
+        val routeName: String?,
         val status: ShuttleState,
         val index: Int,
         val heading: BigDecimal,

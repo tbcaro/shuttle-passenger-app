@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter
 class ShuttleActivityAdapter {
     var shuttleId: Int = 0
     var shuttleName: String = ""
-    var shuttleLatitude: BigDecimal = BigDecimal("0")
-    var shuttleLongitude: BigDecimal = BigDecimal("0")
+    var shuttleLatitude: BigDecimal? = BigDecimal("0")
+    var shuttleLongitude: BigDecimal? = BigDecimal("0")
     var shuttleHeading: BigDecimal = BigDecimal("0")
     var driverName: String = ""
     var routeName: String = ""
