@@ -64,10 +64,12 @@ class ServiceShuttlesController(private val shuttleService: ShuttleService,
         model.addAttribute("shuttleActivityAdapters", shuttleActivityAdapters)
         model.addAttribute("publicId", publicId)
 
-        if (shuttleActivityAdapters.size == 1) {
-            return "redirect:/shuttle-map?publicId=${publicId}&shuttleId=${shuttleActivityAdapters[0].shuttleId}"
-        } else {
-            return "service-shuttles"
-        }
+        return "service-shuttles"
+        // TODO : Re-Add, but make sure that link takes back to service instead of shuttles, otherwise will create page navigation loop
+//        if (shuttleActivityAdapters.size == 1) {
+//            return "redirect:/shuttle-map?publicId=${publicId}&shuttleId=${shuttleActivityAdapters[0].shuttleId}"
+//        } else {
+//            return "service-shuttles"
+//        }
     }
 }
