@@ -24,7 +24,7 @@ class ApiController(private val mapService: MapService) {
 
         activityAdapter.shuttleId = shuttle.shuttleID
         activityAdapter.driverName = "${shuttle.driverFName} ${shuttle.driverLName}"
-        activityAdapter.routeName = shuttle.routeName
+        activityAdapter.routeName = shuttle.routeName ?: "Custom Route"
         activityAdapter.shuttleName = shuttle.shuttleName
         activityAdapter.shuttleStatus = shuttle.status
         activityAdapter.shuttleLatitude = shuttle.latitude
@@ -46,10 +46,10 @@ class ApiController(private val mapService: MapService) {
             assignmentStop.lat = it.latitude
             assignmentStop.long = it.longitude
             assignmentStop.order = it.index
-            assignmentStop.estArriveTime = it.ETA.toLocalTime()
-            assignmentStop.estDepartTime = it.ETD.toLocalTime()
-            assignmentStop.actualArriveTime = it.TOA.toLocalTime()
-            assignmentStop.actualDepartTime = it.TOD.toLocalTime()
+            assignmentStop.estArriveTime = it.ETA?.toLocalTime()
+            assignmentStop.estDepartTime = it.ETD?.toLocalTime()
+            assignmentStop.actualArriveTime = it.TOA?.toLocalTime()
+            assignmentStop.actualDepartTime = it.TOD?.toLocalTime()
 
             assignmentStops.add(assignmentStop)
         }

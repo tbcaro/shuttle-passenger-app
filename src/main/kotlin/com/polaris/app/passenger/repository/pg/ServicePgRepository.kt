@@ -56,7 +56,7 @@ class ServicePgRepository(val db: JdbcTemplate): ServiceRepository
 
     override fun findShuttleNum(serviceID: Int): Int {
         val shuttleNums = db.query(
-                "SELECT count(shuttleid) AS c FROM shuttle_activity INNER JOIN shuttle ON (shuttle_activity.shuttleid = shuttle.\"ID\") WHERE shuttle.serviceid = ?;",
+                "SELECT count(shuttleid) AS c FROM shuttle_activity INNER JOIN shuttle ON (shuttle_activity.shuttleid = shuttle.\"ID\") WHERE shuttle.serviceid = ? AND (shuttle_activity.status = 'DRIVING' OR shuttle_activity.status = 'AT_STOP');",
                 arrayOf(serviceID),{
                     resultSet, rowNum -> ShuttleNumEntity(
                         resultSet.getInt("c")

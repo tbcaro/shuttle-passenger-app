@@ -9,7 +9,7 @@ data class ShuttleEntity(
         val driverID: Int,
         val iconColor: String,
         val assignmentID: Int,
-        val routeName: String,
+        val routeName: String?,
         val index: Int,
         val heading: BigDecimal,
         val latitude: BigDecimal,
