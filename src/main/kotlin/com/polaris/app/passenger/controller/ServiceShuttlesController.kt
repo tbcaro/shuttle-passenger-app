@@ -28,6 +28,7 @@ class ServiceShuttlesController(private val shuttleService: ShuttleService,
             shuttleActivity.shuttleId = it.shuttleID
             shuttleActivity.driverName = "${it.driverFName} ${it.driverLName}"
             shuttleActivity.shuttleName = it.shuttleName
+            shuttleActivity.routeName = it.routeName ?: "Custom Route"
             shuttleActivity.shuttleStatus = it.status
             shuttleActivity.shuttleLatitude = it.latitude
             shuttleActivity.shuttleLongitude = it.longitude
@@ -48,14 +49,15 @@ class ServiceShuttlesController(private val shuttleService: ShuttleService,
                 assignmentStop.lat = it.latitude
                 assignmentStop.long = it.longitude
                 assignmentStop.order = it.index
-                assignmentStop.estArriveTime = it.ETA.toLocalTime()
-                assignmentStop.estDepartTime = it.ETD.toLocalTime()
-                assignmentStop.actualArriveTime = it.TOA.toLocalTime()
-                assignmentStop.actualDepartTime = it.TOD.toLocalTime()
+                assignmentStop.estArriveTime = it.ETA?.toLocalTime()
+                assignmentStop.estDepartTime = it.ETD?.toLocalTime()
+                assignmentStop.actualArriveTime = it.TOA?.toLocalTime()
+                assignmentStop.actualDepartTime = it.TOD?.toLocalTime()
 
                 assignmentStops.add(assignmentStop)
             }
             shuttleActivity.assignmentReport?.assignmentStops = assignmentStops
+            shuttleActivityAdapters.add(shuttleActivity)
         }
 
         model.addAttribute("serviceName", service.serviceName)
