@@ -148,6 +148,10 @@ function ShuttleMapApp() {
   };
 
   var updateShuttleMarker = function() {
+    if (self.mapMarkers.shuttleMarker != null) {
+      self.mapMarkers.shuttleMarker.setMap(null);
+    }
+
     self.mapMarkers.shuttleMarker = new google.maps.Marker({
                    position: {
                      lat: activityData.shuttleLatitude,
