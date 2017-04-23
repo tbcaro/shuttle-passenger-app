@@ -56,7 +56,8 @@ class ServiceShuttlesController(private val shuttleService: ShuttleService,
 
                 assignmentStops.add(assignmentStop)
             }
-            shuttleActivity.assignmentReport?.assignmentStops = assignmentStops
+            assignmentReport.assignmentStops = assignmentStops
+            shuttleActivity.assignmentReport = assignmentReport
             shuttleActivityAdapters.add(shuttleActivity)
         }
 

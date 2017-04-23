@@ -53,7 +53,8 @@ class ApiController(private val mapService: MapService) {
 
             assignmentStops.add(assignmentStop)
         }
-        activityAdapter.assignmentReport?.assignmentStops = assignmentStops
+        assignmentReport.assignmentStops = assignmentStops
+        activityAdapter.assignmentReport = assignmentReport
 
         return ResponseEntity(activityAdapter, HttpStatus.OK)
     }
