@@ -12,7 +12,7 @@ import java.sql.Timestamp
 
 @Component
 class MapPgRepository(val db: JdbcTemplate): MapRepository {
-    override fun findShuttle(shuttleID: Int): ShuttleEntity {
+    override fun findShuttle(shuttleID: Int): ShuttleEntity? {
         val shuttleEntities = db.query(
                 "SELECT * FROM shuttle INNER JOIN shuttle_activity ON (shuttle.\"ID\" = shuttle_activity.shuttleid) INNER JOIN assignment ON (shuttle_activity.assignmentid = assignment.assignmentid) WHERE shuttle.\"ID\" = ?;",
                 arrayOf(shuttleID),{
@@ -31,7 +31,10 @@ class MapPgRepository(val db: JdbcTemplate): MapRepository {
                     )
                 }
         )
-        return shuttleEntities[0]
+        if (shuttleEntities.isNotEmpty())
+            return shuttleEntities[0]
+        else
+            return null
     }
 
     override fun findStops(assignmentID: Int): List<StopEntity> {
