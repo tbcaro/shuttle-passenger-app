@@ -26,15 +26,15 @@ class ApiController(private val mapService: MapService) {
             activityAdapter.shuttleId = shuttle.shuttleID
             activityAdapter.driverName = "${shuttle.driverFName} ${shuttle.driverLName}"
             activityAdapter.routeName = shuttle.routeName ?: "Custom Route"
-            activityAdapter.shuttleName = shuttle.shuttleName
+            if (shuttle.shuttleName != null)activityAdapter.shuttleName = shuttle.shuttleName
             activityAdapter.shuttleStatus = shuttle.status
             activityAdapter.shuttleLatitude = shuttle.latitude
             activityAdapter.shuttleLongitude = shuttle.longitude
             activityAdapter.shuttleHeading = shuttle.heading
 
             val assignmentReport = AssignmentReport()
-            assignmentReport.assignmentId = shuttle.assignmentID
-            assignmentReport.currentStop = shuttle.index
+            if (shuttle.assignmentID != null)assignmentReport.assignmentId = shuttle.assignmentID
+            if (shuttle.index != null)assignmentReport.currentStop = shuttle.index
 
             val assignmentStops = arrayListOf<AssignmentStopAdapter>()
             shuttle.stops.forEach {

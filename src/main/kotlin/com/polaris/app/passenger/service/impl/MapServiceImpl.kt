@@ -11,32 +11,40 @@ class MapServiceImpl(val mapRepository: MapRepository): MapService {
 
         if (shuttleEntity != null) {
             val stops = arrayListOf<Stop>()
-            val s = this.mapRepository.findStops(shuttleEntity.assignmentID)
-            s.forEach {
-                val stop = Stop(
-                        assignmentStopID = it.assignmentStopID,
-                        assignmentID = it.assignmentID,
-                        index = it.index,
-                        stopId = it.stopId,
-                        ETA = it.ETA,
-                        ETD = it.ETD,
-                        TOA = it.TOA,
-                        TOD = it.TOD,
-                        stopName = it.stopName,
-                        address = it.address,
-                        latitude = it.latitude,
-                        longitude = it.longitude
-                )
-                stops.add(stop)
+            if (shuttleEntity.assignmentID != null) {
+                val s = this.mapRepository.findStops(shuttleEntity.assignmentID)
+                s.forEach {
+                    val stop = Stop(
+                            assignmentStopID = it.assignmentStopID,
+                            assignmentID = it.assignmentID,
+                            index = it.index,
+                            stopId = it.stopId,
+                            ETA = it.ETA,
+                            ETD = it.ETD,
+                            TOA = it.TOA,
+                            TOD = it.TOD,
+                            stopName = it.stopName,
+                            address = it.address,
+                            latitude = it.latitude,
+                            longitude = it.longitude
+                    )
+                    stops.add(stop)
+                }
             }
 
-            val driver = this.mapRepository.getDriverInfo(shuttleEntity.driverID)
+            var driver = this.mapRepository.getDriverInfo(shuttleEntity.driverID)
+
+            var fname: String? = null
+            var lname: String? = null
+
+            if (driver != null)fname = driver.fname
+            if (driver != null)lname = driver.lname
 
             return Shuttle(
                     shuttleID = shuttleEntity.shuttleID,
                     shuttleName = shuttleEntity.shuttleName,
-                    driverFName = driver.fname,
-                    driverLName = driver.lname,
+                    driverFName = fname,
+                    driverLName = lname,
                     iconColor = shuttleEntity.iconColor,
                     assignmentID = shuttleEntity.assignmentID,
                     routeName = shuttleEntity.routeName,
