@@ -48,7 +48,7 @@ function ShuttleMapApp() {
 
     // bindEventHandlers();
     loadShuttleActivity();
-    intervalId = setInterval(loadShuttleActivity, 5000);
+    intervalId = setInterval(loadShuttleActivity, 3000);
   };
 
   self.initializeMap = function() {
