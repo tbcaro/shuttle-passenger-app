@@ -20,42 +20,45 @@ class ApiController(private val mapService: MapService) {
     @RequestMapping("/fetchShuttleActivity")
     fun fetchShuttleActivity(shuttleId: Int) : ResponseEntity<ShuttleActivityAdapter> {
         val shuttle = mapService.retrieveShuttle(shuttleId)
-        val activityAdapter = ShuttleActivityAdapter()
+        if (shuttle != null) {
+            val activityAdapter = ShuttleActivityAdapter()
 
-        activityAdapter.shuttleId = shuttle.shuttleID
-        activityAdapter.driverName = "${shuttle.driverFName} ${shuttle.driverLName}"
-        activityAdapter.routeName = shuttle.routeName ?: "Custom Route"
-        activityAdapter.shuttleName = shuttle.shuttleName
-        activityAdapter.shuttleStatus = shuttle.status
-        activityAdapter.shuttleLatitude = shuttle.latitude
-        activityAdapter.shuttleLongitude = shuttle.longitude
-        activityAdapter.shuttleHeading = shuttle.heading
+            activityAdapter.shuttleId = shuttle.shuttleID
+            activityAdapter.driverName = "${shuttle.driverFName} ${shuttle.driverLName}"
+            activityAdapter.routeName = shuttle.routeName ?: "Custom Route"
+            if (shuttle.shuttleName != null)activityAdapter.shuttleName = shuttle.shuttleName
+            activityAdapter.shuttleStatus = shuttle.status
+            activityAdapter.shuttleLatitude = shuttle.latitude
+            activityAdapter.shuttleLongitude = shuttle.longitude
+            activityAdapter.shuttleHeading = shuttle.heading
 
-        val assignmentReport = AssignmentReport()
-        assignmentReport.assignmentId = shuttle.assignmentID
-        assignmentReport.currentStop = shuttle.index
+            val assignmentReport = AssignmentReport()
+            if (shuttle.assignmentID != null)assignmentReport.assignmentId = shuttle.assignmentID
+            if (shuttle.index != null)assignmentReport.currentStop = shuttle.index
 
-        val assignmentStops = arrayListOf<AssignmentStopAdapter>()
-        shuttle.stops.forEach {
-            val assignmentStop = AssignmentStopAdapter()
+            val assignmentStops = arrayListOf<AssignmentStopAdapter>()
+            shuttle.stops.forEach {
+                val assignmentStop = AssignmentStopAdapter()
 
-            assignmentStop.assingmentStopId = it.assignmentStopID
-            assignmentStop.stopId = it.stopId
-            assignmentStop.name = it.stopName ?: "Custom Stop"
-            assignmentStop.address = it.address ?: ""
-            assignmentStop.lat = it.latitude
-            assignmentStop.long = it.longitude
-            assignmentStop.order = it.index
-            assignmentStop.estArriveTime = it.ETA?.toLocalTime()
-            assignmentStop.estDepartTime = it.ETD?.toLocalTime()
-            assignmentStop.actualArriveTime = it.TOA?.toLocalTime()
-            assignmentStop.actualDepartTime = it.TOD?.toLocalTime()
+                assignmentStop.assingmentStopId = it.assignmentStopID
+                assignmentStop.stopId = it.stopId
+                assignmentStop.name = it.stopName ?: "Custom Stop"
+                assignmentStop.address = it.address ?: ""
+                assignmentStop.lat = it.latitude
+                assignmentStop.long = it.longitude
+                assignmentStop.order = it.index
+                assignmentStop.estArriveTime = it.ETA?.toLocalTime()
+                assignmentStop.estDepartTime = it.ETD?.toLocalTime()
+                assignmentStop.actualArriveTime = it.TOA?.toLocalTime()
+                assignmentStop.actualDepartTime = it.TOD?.toLocalTime()
 
-            assignmentStops.add(assignmentStop)
+                assignmentStops.add(assignmentStop)
+            }
+            assignmentReport.assignmentStops = assignmentStops
+            activityAdapter.assignmentReport = assignmentReport
+
+            return ResponseEntity(activityAdapter, HttpStatus.OK)
         }
-        assignmentReport.assignmentStops = assignmentStops
-        activityAdapter.assignmentReport = assignmentReport
-
-        return ResponseEntity(activityAdapter, HttpStatus.OK)
+        else return ResponseEntity(null, HttpStatus.OK)
     }
 }

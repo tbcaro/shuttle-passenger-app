@@ -27,7 +27,7 @@ class ServiceShuttlesController(private val shuttleService: ShuttleService,
             val shuttleActivity = ShuttleActivityAdapter()
             shuttleActivity.shuttleId = it.shuttleID
             shuttleActivity.driverName = "${it.driverFName} ${it.driverLName}"
-            shuttleActivity.shuttleName = it.shuttleName
+            if (it.shuttleName != null)shuttleActivity.shuttleName = it.shuttleName
             shuttleActivity.routeName = it.routeName ?: "Custom Route"
             shuttleActivity.shuttleStatus = it.status
             shuttleActivity.shuttleLatitude = it.latitude
@@ -35,8 +35,8 @@ class ServiceShuttlesController(private val shuttleService: ShuttleService,
             shuttleActivity.shuttleHeading = it.heading
 
             val assignmentReport = AssignmentReport()
-            assignmentReport.assignmentId = it.assignmentID
-            assignmentReport.currentStop = it.index
+            if (it.assignmentID != null)assignmentReport.assignmentId = it.assignmentID
+            if (it.index != null)assignmentReport.currentStop = it.index
 
             val assignmentStops = arrayListOf<AssignmentStopAdapter>()
             it.stops.forEach {

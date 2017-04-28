@@ -12,8 +12,50 @@ import java.sql.Timestamp
 
 @Component
 class MapPgRepository(val db: JdbcTemplate): MapRepository {
-    override fun findShuttle(shuttleID: Int): ShuttleEntity {
-        val shuttleEntities = db.query(
+    override fun findShuttle(shuttleID: Int): ShuttleEntity? {
+        val rows = db.queryForList(
+                "SELECT shuttle.\"ID\", shuttle.\"Name\", shuttle_activity.driverid, " +
+                "shuttle.iconcolor, shuttle_activity.assignmentid, assignment.routename, " +
+                "route.\"Name\" AS rname, shuttle_activity.\"Index\", shuttle_activity.heading, " +
+                "shuttle_activity.latitude, shuttle_activity.longitude, shuttle_activity.status " +
+                "FROM shuttle INNER JOIN shuttle_activity ON (shuttle.\"ID\" = shuttle_activity.shuttleid) INNER JOIN assignment ON (shuttle_activity.assignmentid = assignment.assignmentid) LEFT OUTER JOIN route ON (assignment.routeid = route.\"ID\") WHERE shuttle.\"ID\" = ?;",
+                shuttleID)
+
+        val shuttleEntities = arrayListOf<ShuttleEntity>()
+        rows.forEach {
+            var shuttleName: String? = ""
+            var driverID: Int? = null
+            var iconcolor: String? = "#000000"
+            var assignmentid: Int? = null
+            var routeName: String? = "Custom Route"
+            var index: Int? = null
+
+            if (it["Name"] != null)shuttleName = it["Name"] as String
+            if (it["driverid"] != null)driverID = it["driverid"] as Int
+            if (it["iconcolor"] != null)iconcolor = it["iconcolor"] as String
+            if (it["assignmentid"] != null)assignmentid = it["assignmentid"] as Int
+            if (it["rname"] != null)routeName = it["rname"] as String
+            else if (it["rname"] != null)routeName = it["routename"] as String
+            if (it["Index"] != null)index = it["Index"] as Int
+
+            val shuttleEntity = ShuttleEntity(
+                    shuttleID = it["ID"] as Int,
+                    shuttleName = shuttleName,
+                    driverID = driverID,
+                    iconColor = iconcolor,
+                    assignmentID = assignmentid,
+                    routeName = routeName,
+                    index = index,
+                    heading = it["heading"] as BigDecimal,
+                    latitude = it["latitude"] as BigDecimal,
+                    longitude = it["longitude"] as BigDecimal,
+                    status = ShuttleState.valueOf(it["status"] as String)
+            )
+            shuttleEntities.add(shuttleEntity)
+        }
+        return shuttleEntities[0]
+
+        /*val shuttleEntities = db.query(
                 "SELECT * FROM shuttle INNER JOIN shuttle_activity ON (shuttle.\"ID\" = shuttle_activity.shuttleid) INNER JOIN assignment ON (shuttle_activity.assignmentid = assignment.assignmentid) WHERE shuttle.\"ID\" = ?;",
                 arrayOf(shuttleID),{
                     resultSet, rowNum -> ShuttleEntity(
@@ -31,7 +73,10 @@ class MapPgRepository(val db: JdbcTemplate): MapRepository {
                     )
                 }
         )
-        return shuttleEntities[0]
+        if (shuttleEntities.isNotEmpty())
+            return shuttleEntities[0]
+        else
+            return null*/
     }
 
     override fun findStops(assignmentID: Int): List<StopEntity> {
@@ -80,16 +125,20 @@ class MapPgRepository(val db: JdbcTemplate): MapRepository {
         return assignmentStopEntities
     }
 
-    override fun getDriverInfo(driverID: Int): DriverEntity {
-        val driver = db.query(
-                "SELECT fname, lname FROM \"user\" WHERE \"ID\" = ?",
-                arrayOf(driverID), {
-                    resultSet, rowNum -> DriverEntity(
-                    resultSet.getString("fname"),
-                    resultSet.getString("lname")
+    override fun getDriverInfo(driverID: Int?): DriverEntity? {
+        if (driverID != null) {
+            val driver = db.query(
+                    "SELECT fname, lname FROM \"user\" WHERE \"ID\" = ?",
+                    arrayOf(driverID), {
+                resultSet, rowNum ->
+                DriverEntity(
+                        resultSet.getString("fname"),
+                        resultSet.getString("lname")
                 )
             }
-        )
-        return driver[0]
+            )
+            return driver[0]
+        }
+        return null
     }
 }

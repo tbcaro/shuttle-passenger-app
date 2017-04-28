@@ -48,7 +48,7 @@ function ShuttleMapApp() {
 
     // bindEventHandlers();
     loadShuttleActivity();
-    intervalId = setInterval(loadShuttleActivity, 5000);
+    intervalId = setInterval(loadShuttleActivity, 3000);
   };
 
   self.initializeMap = function() {
@@ -68,17 +68,24 @@ function ShuttleMapApp() {
 
     axios.get('/api/fetchShuttleActivity?shuttleId=' + shuttleId)
         .then(function (response) {
-          activityData = response.data;
-          updateDetails();
-          updateShuttleMarker();
+          if (response.data == null && activityData != null) {
+            alert('Shuttle route has ended. You will be redirected.');
+            window.location = '/find-services';
+          } else {
+            activityData = response.data;
+            updateDetails();
+            updateShuttleMarker();
 
-          if(initialLoad) {
-            fitMapToBounds();
+            if(initialLoad) {
+              fitMapToBounds();
+            }
+            initialLoad = false;
           }
-          initialLoad = false;
         })
         .catch(function (error) {
           console.log(error);
+          alert('Shuttle route has ended. You will be redirected.');
+          window.location = '/find-services';
         });
   };
 
