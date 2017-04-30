@@ -22,6 +22,12 @@ function FindServiceApp() {
       var filter = elements.txtSearchServices.val();
       window.location = '/find-services?filter=' + filter;
     });
+
+    elements.txtSearchServices.on('keyup', function(event) {
+      if (event.key == 'Enter') {
+        elements.btnSearch.click();
+      }
+    });
   };
 
   self.initialize();
