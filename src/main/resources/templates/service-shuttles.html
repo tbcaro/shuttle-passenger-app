@@ -33,66 +33,73 @@
       <div class="row">
         <div class="col-12">
 
-          <div th:each="shuttleAdapter : ${shuttleActivityAdapters}" class="shuttle-card card m-2 p-2" th:attr="data-shuttle-id=${shuttleAdapter.shuttleId}, data-public-id=${publicId}">
-            <div class="row">
-              <div class="col-6">
-                <i class="fa fa-bus"></i>
-                <span th:text="${shuttleAdapter.shuttleName}"></span>
-                <!--Shuttle 1A-->
-              </div>
-              <div th:switch="${shuttleAdapter.shuttleStatus.toString()}" class="col-6 text-right">
-                <div th:case="'DRIVING'" class="state-label btn btn-sm btn-success">
-                  Driving
-                </div>
-                <div th:case="'AT_STOP'" class="state-label btn btn-sm btn-warning">
-                  At Stop
-                </div>
-              </div>
+          <div th:if="${shuttleActivityAdapters.size() == 0}">
+            <div class="card text-center m-2 p-5">
+              No active shuttles found
             </div>
-            <div class="row">
-              <div class="col-6">
-                Route:
-              </div>
-              <div th:text="${shuttleAdapter.routeName}" class="col-6 text-right">
-                <!--Downtown Loop-->
-              </div>
-            </div>
-            <div class="row">
-              <!--<div th:text="'Next Stop (' + ${shuttleAdapter.assignmentReport.currentStop + 1} + '/' + ${shuttleAdapter.assignmentReport.assignmentStops.size} + '):'" class="col-12">-->
-              <div th:text="'Next Stop (' + ${shuttleAdapter.assignmentReport.currentStop + 1} + '/' + ${shuttleAdapter.currentAssignmentLength} + '):'" class="col-12">
-                <!--Next Stop (2/4):-->
-              </div>
-            </div>
-            <div class="next-stop-card card p-2 mt-1">
+          </div>
+          <div th:if="${shuttleActivityAdapters.size() > 0}">
+            <div th:each="shuttleAdapter : ${shuttleActivityAdapters}" class="shuttle-card card m-2 p-2" th:attr="data-shuttle-id=${shuttleAdapter.shuttleId}, data-public-id=${publicId}">
               <div class="row">
-                <div class="col-10">
-                  <i class="fa fa-map-pin"></i>
-                  <span th:text="${shuttleAdapter.currentStopName}"></span>
-                  <!--Park Bridge-->
+                <div class="col-6">
+                  <i class="fa fa-bus"></i>
+                  <span th:text="${shuttleAdapter.shuttleName}"></span>
+                  <!--Shuttle 1A-->
                 </div>
-                <div class="col-2 text-right">
-                  <i class="fa fa-spinner"></i>
+                <div th:switch="${shuttleAdapter.shuttleStatus.toString()}" class="col-6 text-right">
+                  <div th:case="'DRIVING'" class="state-label btn btn-sm btn-success">
+                    Driving
+                  </div>
+                  <div th:case="'AT_STOP'" class="state-label btn btn-sm btn-warning">
+                    At Stop
+                  </div>
                 </div>
               </div>
               <div class="row">
-                <div th:text="${shuttleAdapter.currentStopAddress}" class="col-12">
-                  <!--123 Park Bridge Ave-->
+                <div class="col-6">
+                  Route:
+                </div>
+                <div th:text="${shuttleAdapter.routeName}" class="col-6 text-right">
+                  <!--Downtown Loop-->
                 </div>
               </div>
               <div class="row">
-                <div class="col-6 text-right">
-                  Est. Arrive:
-                </div>
-                <div th:text="${shuttleAdapter.currentStopArrive}" class="col-6">
-                  <!--5:00 PM-->
+                <!--<div th:text="'Next Stop (' + ${shuttleAdapter.assignmentReport.currentStop + 1} + '/' + ${shuttleAdapter.assignmentReport.assignmentStops.size} + '):'" class="col-12">-->
+                <div th:text="'Next Stop (' + ${shuttleAdapter.assignmentReport.currentStop + 1} + '/' + ${shuttleAdapter.currentAssignmentLength} + '):'" class="col-12">
+                  <!--Next Stop (2/4):-->
                 </div>
               </div>
-              <div class="row">
-                <div class="col-6 text-right">
-                  Est. Depart:
+              <div class="next-stop-card card p-2 mt-1">
+                <div class="row">
+                  <div class="col-10">
+                    <i class="fa fa-map-pin"></i>
+                    <span th:text="${shuttleAdapter.currentStopName}"></span>
+                    <!--Park Bridge-->
+                  </div>
+                  <div class="col-2 text-right">
+                    <i class="fa fa-spinner"></i>
+                  </div>
                 </div>
-                <div th:text="${shuttleAdapter.currentStopDepart}" class="col-6">
-                  <!--5:30 PM-->
+                <div class="row">
+                  <div th:text="${shuttleAdapter.currentStopAddress}" class="col-12">
+                    <!--123 Park Bridge Ave-->
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 text-right">
+                    Est. Arrive:
+                  </div>
+                  <div th:text="${shuttleAdapter.currentStopArrive}" class="col-6">
+                    <!--5:00 PM-->
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 text-right">
+                    Est. Depart:
+                  </div>
+                  <div th:text="${shuttleAdapter.currentStopDepart}" class="col-6">
+                    <!--5:30 PM-->
+                  </div>
                 </div>
               </div>
             </div>
