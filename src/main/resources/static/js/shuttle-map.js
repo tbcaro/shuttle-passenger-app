@@ -132,13 +132,13 @@ function ShuttleMapApp() {
 
         stopName.html(stop.name);
         if (stop.actualArriveTime != null) {
-          arriveTime.html(timeUtils.formatTime(stop.actualArriveTime));
+          arriveTime.html(timeUtils.formatTime(stop.actualArriveTime) + ' (actual)');
         } else {
           arriveTime.html(timeUtils.formatTime(stop.estArriveTime));
         }
 
         if (stop.actualDepartTime != null) {
-          departTime.html(timeUtils.formatTime(stop.actualDepartTime));
+          departTime.html(timeUtils.formatTime(stop.actualDepartTime) + ' (actual)');
         } else {
           departTime.html(timeUtils.formatTime(stop.estDepartTime));
         }

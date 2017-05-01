@@ -32,14 +32,19 @@
       <div class="row">
         <div class="col-12">
 
-
-          <!-- test cards -->
-          <div th:each="serviceAdapter : ${serviceAdapters}" class="service-card card m-2 p-2" th:attr="data-public-id=${serviceAdapter.publicId}">
-            <div class="row">
-              <div th:text="${serviceAdapter.serviceName}" class="col-12"></div>
+          <div th:if="${serviceAdapters.size() == 0}">
+            <div class="card text-center m-2 p-5">
+              No services found
             </div>
-            <div class="row">
-              <div th:text="${serviceAdapter.activeShuttleCount} + ' shuttles active'" class="col-12 shuttle-count pt-2"></div>
+          </div>
+          <div th:if="${serviceAdapters.size() > 0}">
+            <div th:each="serviceAdapter : ${serviceAdapters}" class="service-card card m-2 p-2" th:attr="data-public-id=${serviceAdapter.publicId}">
+              <div class="row">
+                <div th:text="${serviceAdapter.serviceName}" class="col-12"></div>
+              </div>
+              <div class="row">
+                <div th:text="${serviceAdapter.activeShuttleCount} + ' shuttles active'" class="col-12 shuttle-count pt-2"></div>
+              </div>
             </div>
           </div>
 
