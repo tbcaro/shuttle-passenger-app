@@ -14,28 +14,46 @@ import java.time.LocalDateTime
 @Component
 class ShuttlePgRepository(val db: JdbcTemplate): ShuttleRepository{
     override fun findShuttles(publicId: String): List<ShuttleEntity> {
-        val shuttleEntities = db.query(
-                "SELECT * FROM shuttle " +
-                        "INNER JOIN shuttle_activity ON (shuttle.\"ID\" = shuttle_activity.shuttleid) " +
-                        "INNER JOIN assignment ON (shuttle_activity.assignmentid = assignment.assignmentid) " +
-                        "INNER JOIN service ON (shuttle.serviceid = service.serviceid) " +
-                        "WHERE service.publicid = ? AND shuttle_activity.assignmentid IS NOT NULL;",
-                arrayOf(publicId),{
-                    resultSet, rowNum -> ShuttleEntity(
-                        resultSet.getInt("ID"),
-                        resultSet.getString("Name"),
-                        resultSet.getInt("driverid"),
-                        resultSet.getString("iconcolor"),
-                        resultSet.getInt("assignmentid"),
-                        resultSet.getString("routename"),
-                        resultSet.getInt("Index"),
-                        resultSet.getBigDecimal("heading"),
-                        resultSet.getBigDecimal("latitude"),
-                        resultSet.getBigDecimal("longitude"),
-                        status = ShuttleState.valueOf(resultSet.getString("status"))
-                    )
-                }
-        )
+        val rows = db.queryForList(
+                "SELECT shuttle.\"ID\", shuttle.\"Name\", shuttle_activity.driverid, " +
+                        "shuttle.iconcolor, shuttle_activity.assignmentid, assignment.routename, " +
+                        "route.\"Name\" AS rname, shuttle_activity.\"Index\", shuttle_activity.heading, " +
+                        "shuttle_activity.latitude, shuttle_activity.longitude, shuttle_activity.status " +
+                        "FROM shuttle INNER JOIN shuttle_activity ON (shuttle.\"ID\" = shuttle_activity.shuttleid) INNER JOIN assignment ON (shuttle_activity.assignmentid = assignment.assignmentid) LEFT OUTER JOIN route ON (assignment.routeid = route.\"ID\") INNER JOIN service ON (service.serviceid = shuttle.serviceid) WHERE service.publicid = ?;",
+                publicId)
+
+        val shuttleEntities = arrayListOf<ShuttleEntity>()
+        rows.forEach {
+            var shuttleName: String? = ""
+            var driverID: Int? = null
+            var iconcolor: String? = "#000000"
+            var assignmentid: Int? = null
+            var routeName: String? = "Custom Route"
+            var index: Int? = null
+
+            if (it["Name"] != null)shuttleName = it["Name"] as String
+            if (it["driverid"] != null)driverID = it["driverid"] as Int
+            if (it["iconcolor"] != null)iconcolor = it["iconcolor"] as String
+            if (it["assignmentid"] != null)assignmentid = it["assignmentid"] as Int
+            if (it["rname"] != null)routeName = it["rname"] as String
+            else if (it["rname"] != null)routeName = it["routename"] as String
+            if (it["Index"] != null)index = it["Index"] as Int
+
+            val shuttleEntity = ShuttleEntity(
+                    shuttleID = it["ID"] as Int,
+                    shuttleName = shuttleName,
+                    driverID = driverID,
+                    iconColor = iconcolor,
+                    assignmentID = assignmentid,
+                    routeName = routeName,
+                    index = index,
+                    heading = it["heading"] as BigDecimal,
+                    latitude = it["latitude"] as BigDecimal,
+                    longitude = it["longitude"] as BigDecimal,
+                    status = ShuttleState.valueOf(it["status"] as String)
+            )
+            shuttleEntities.add(shuttleEntity)
+        }
         return shuttleEntities
     }
 
